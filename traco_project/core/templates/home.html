@@ -7,77 +7,78 @@
 
 {% block content %}
 <section class="hero-banner">
-  <div class="hero-bg">
-    {% if banner and banner.background_image %}
-      <img src="{{ banner.background_image.url }}" alt="banner bg" class="hero-bg-img">
-    {% else %}
-      <div class="hero-bg-fallback"></div>
-    {% endif %}
-  </div>
-
-  <div class="container hero-inner">
-    <div class="row align-items-center">
-      <!-- LEFT: text and avatars -->
-      <div class="col-lg-7 hero-left">
-        <div class="small-note">
-          {% if banner %}{{ banner.title_small|default:"Keep Your Money Safe" }}{% else %}Keep Your Money Safe{% endif %}
-          <span class="bang">!</span>
-        </div>
-
-        <h1 class="hero-title">
-          <span class="g1">{{ banner.title_line1|default:"Build Confidence With" }}</span><br>
-          <span class="g2">{{ banner.title_line2|default:"Every Single Trade." }}</span><br>
-          <span class="g3">{{ banner.title_line3|default:"Invest for Your Future" }}</span>
-        </h1>
-
-        <div class="hero-hr"></div>
-
-        <div class="avatar-row">
-          <div class="avatars">
-            {% if banner %}
-              {% for a in banner.avatars.all %}
-                <img src="{{ a.image.url }}" alt="{{ a.alt }}" class="avatar"
-     class="avatar"
-     style="z-index: {{ forloop.revcounter0 }};">
-              {% endfor %}
-            {% else %}
-              <!-- placeholder avatars if none -->
-              <img src="{% static 'images/user-placeholder.png' %}" class="avatar">
-              <img src="{% static 'images/user-placeholder.png' %}" class="avatar">
-              <img src="{% static 'images/user-placeholder.png' %}" class="avatar">
-            {% endif %}
-          </div>
-
-          <div class="user-count">
-            <div class="count">{{ banner.user_count_text|default:"500+" }}</div>
-            <div class="label">{{ banner.user_count_label|default:"Realtime Users" }}</div>
-          </div>
-        </div>
-
-        <div class="cta-row">
-          <div class="cta-circles" aria-hidden="true">
-            <span class="circle outline"></span>
-            <span class="circle fill"><span class="arrow">➜</span></span>
-          </div>
-          <div class="cta-text">{% if banner and banner.ctas.first %}
-  {{ banner.ctas.first.label }}
-{% endif %} </div>
-        </div>
-      </div>
-
-      <!-- RIGHT: man image and decorative bars -->
-      <div class="col-lg-5 hero-right text-end">
-        <div class="man-wrap">
-          {% if banner and banner.man_image %}
-            <img src="{{ banner.man_image.url }}" alt="man" class="man-img">
-          {% else %}
-            <img src="{% static 'images/man-placeholder.png' %}" class="man-img">
-          {% endif %}
-          <!-- vertical bars using pseudo elements via CSS on .man-wrap -->
-        </div>
-      </div>
+    <div class="hero-bg">
+        {% if banner and banner.background_image %}
+        <img src="{{ banner.background_image.url }}" alt="banner bg" class="hero-bg-img">
+        {% else %}
+        <div class="hero-bg-fallback"></div>
+        {% endif %}
     </div>
-  </div>
+
+    <div class="container hero-inner">
+        <div class="row align-items-center">
+            <!-- LEFT: text and avatars -->
+            <div class="col-lg-7 hero-left">
+                <div class="small-note">
+                    {% if banner %}{{ banner.title_small|default:"Keep Your Money Safe" }}{% else %}Keep Your Money
+                    Safe{% endif %}
+                    <span class="bang">!!!</span>
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="g1">{{ banner.title_line1|default:"Build Confidence With" }}</span><br>
+                    <span class="g2">{{ banner.title_line2|default:"Every Single Trade." }}</span><br>
+                    <span class="g3">{{ banner.title_line3|default:"Invest for Your Future" }}</span>
+                </h1>
+
+                <div class="hero-hr"></div>
+
+                <div class="avatar-row">
+                    <div class="avatars">
+                        {% if banner %}
+                        {% for a in banner.avatars.all %}
+                        <img src="{{ a.image.url }}" alt="{{ a.alt }}" class="avatar" class="avatar"
+                            style="z-index: {{ forloop.revcounter0 }};">
+                        {% endfor %}
+                        {% else %}
+                        <!-- placeholder avatars if none -->
+                        <img src="{% static 'images/user-placeholder.png' %}" class="avatar">
+                        <img src="{% static 'images/user-placeholder.png' %}" class="avatar">
+                        <img src="{% static 'images/user-placeholder.png' %}" class="avatar">
+                        {% endif %}
+                    </div>
+
+                    <div class="user-count">
+                        <div class="count">{{ banner.user_count_text|default:"500+" }}</div>
+                        <div class="label">{{ banner.user_count_label|default:"Realtime Users" }}</div>
+                    </div>
+                </div>
+
+                <div class="cta-row">
+                    <div class="cta-circles" aria-hidden="true">
+                        <span class="circle outline"></span>
+                        <span class="circle fill"><span class="arrow">➜</span></span>
+                    </div>
+                    <div class="cta-text">{% if banner and banner.ctas.first %}
+                        {{ banner.ctas.first.label }}
+                        {% endif %} </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: man image and decorative bars -->
+            <div class="col-lg-5 hero-right text-end">
+                <div class="man-wrap">
+                    <div class="extra-lines"></div>
+                    {% if banner and banner.man_image %}
+                    <img src="{{ banner.man_image.url }}" alt="man" class="man-img">
+                    {% else %}
+                    <img src="{% static 'images/man-placeholder.png' %}" class="man-img">
+                    {% endif %}
+                    <!-- vertical bars using pseudo elements via CSS on .man-wrap -->
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section class="home-hero container-xl">
 
@@ -88,7 +89,7 @@
         <div class="hero-number-wrap">
             <!-- CSS 3D metallic number -->
             <div class="hero-number-outer">
-                <div class="hero-number" ><img src="static\images\number1.png" alt="{{ f.title_part_left }}"></div>
+                <div class="hero-number"><img src="static\images\number1.png" alt="{{ f.title_part_left }}"></div>
             </div>
 
             <!-- subtle shadow ellipse under the number -->
@@ -106,7 +107,7 @@
         <p class="line line4">{{ line4_html|safe }}</p>
     </div>
 
-   
+
 
     <!-- FEATURES: three columns (use 3-per-row) -->
     <div class="features-row container-xl">
@@ -137,97 +138,104 @@
 
 <!-- --------------------------------------- -->
 <section class="trio-join-cards-wrap">
-  <div class="trio-join-cards">
-    {% for f in cards_section %}
-      {% if forloop.counter == 1 or forloop.counter == 2 %}
-        <a href="{% url 'blogs' %}" class="trio-card {% if f.is_center %}trio-card--center{% else %}trio-card--side{% endif %}" aria-label="{{ f.title }}">
-      {% else %}
-        <a href="{{ f.get_link }}" class="trio-card {% if f.is_center %}trio-card--center{% else %}trio-card--side{% endif %}" aria-label="{{ f.title }}">
-      {% endif %}
+    <div class="trio-join-cards">
+        {% for f in cards_section %}
+        {% if forloop.counter == 1 or forloop.counter == 2 %}
+        <a href="{% url 'blogs' %}"
+            class="trio-card {% if f.is_center %}trio-card--center{% else %}trio-card--side{% endif %}"
+            aria-label="{{ f.title }}">
+            {% else %}
+            <a href="{{ f.get_link }}"
+                class="trio-card {% if f.is_center %}trio-card--center{% else %}trio-card--side{% endif %}"
+                aria-label="{{ f.title }}">
+                {% endif %}
 
-        <div class="trio-card__serial">
-          {% if f.serial == 1 %}01.{% elif f.serial == 2 %}02.{% elif f.serial == 3 %}03.{% else %}{{ f.serial }}.{% endif %}
-        </div>
+                <div class="trio-card__serial">
+                    {% if f.serial == 1 %}01.{% elif f.serial == 2 %}02.{% elif f.serial == 3 %}03.{% else %}{{ f.serial
+                    }}.{% endif %}
+                </div>
 
-        {% if f.is_center %}
-          <div class="trio-card__center-inner">
-            <h3 class="trio-card__title">{{ f.title }}</h3>
-            <p class="trio-card__desc">{{ f.description|linebreaksbr }}</p>
-            <div class="trio-card__learn">Learn More <span class="trio-card__arrow">➜</span></div>
-          </div>
-        {% else %}
-          <div class="trio-card__side-inner">
-            <h4 class="trio-card__side-title">{{ f.title }}</h4>
-            {% if f.subtitle %}
-              <p class="trio-card__side-sub">{{ f.subtitle }}</p>
-            {% endif %}
-          </div>
-        {% endif %}
-      </a>
-    {% endfor %}
-  </div>
+                {% if f.is_center %}
+                <div class="trio-card__center-inner">
+                    <h3 class="trio-card__title">{{ f.title }}</h3>
+                    <p class="trio-card__desc">{{ f.description|linebreaksbr }}</p>
+                    <div class="trio-card__learn">Learn More <span class="trio-card__arrow">➜</span></div>
+                </div>
+                {% else %}
+                <div class="trio-card__side-inner">
+                    <h4 class="trio-card__side-title">{{ f.title }}</h4>
+                    {% if f.subtitle %}
+                    <p class="trio-card__side-sub">{{ f.subtitle }}</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </a>
+            {% endfor %}
+    </div>
 </section>
 <!-- ------------------------how it works---------------- -->
- <section class="howitworks">
-<img src="\static\images\howitworks.PNG" alt="{{ f.title_part_left }}">
+<section class="howitworks">
+    <img src="\static\images\howitworks.PNG" alt="{{ f.title_part_left }}">
 </section>
 <!-- small inline template-utils (only if you lack a make_list filter) - This does nothing if your template engine supports numeric loops -->
 
 <!-- COMMUNITY SECTION -->
 <!-- COMMUNITY SECTION with HERO IMAGE -->
 <section class="community-wrap" aria-labelledby="community-heading">
-  <div class="community-inner">
+    <div class="community-inner">
 
-    {# HERO IMAGE: rounded neon bordered frame #}
-    {% if community_section and community_section.hero_image %}
-      <div class="community-hero-wrap">
-        <div class="community-hero-frame">
-          <img src="{{ community_section.hero_image.url }}" alt="{{ community_section.hero_image_alt }}" loading="lazy" class="community-hero-img">
-        </div>
-      </div>
-    {% endif %}
-
-    {# Heading and lines #}
-    <div class="community-top">
-      <h2 id="community-heading" class="community-heading">
-        {{ community_section.heading_before }} <span class="community-heading--strong">{{ community_section.heading_strong }}</span> {{ community_section.heading_after }}
-      </h2>
-
-      <div class="community-lines">
-        <p class="community-line">{{ community_section.line_1 }}</p>
-        <p class="community-line">{{ community_section.line_2 }}</p>
-        <p class="community-line">{{ community_section.line_3 }}</p>
-      </div>
-    </div>
-
-    {# images grid (same as before) #}
-    <div class="community-grid" aria-hidden="false">
-      {% with imgs=community_section.images.all %}
-        <div class="g g-row1">
-          {% for img in imgs|slice:":3" %}
-            <div class="g-item small" style="animation-delay: {{ forloop.counter0|add:0 }}00ms;">
-              <img src="{{ img.image.url }}" alt="{{ img.caption }}" loading="lazy">
+        {# HERO IMAGE: rounded neon bordered frame #}
+        {% if community_section and community_section.hero_image %}
+        <div class="community-hero-wrap">
+            <div class="community-hero-frame">
+                <img src="{{ community_section.hero_image.url }}" alt="{{ community_section.hero_image_alt }}"
+                    loading="lazy" class="community-hero-img">
             </div>
-          {% empty %}
-            <div class="g-item small placeholder"></div>
-            <div class="g-item small placeholder"></div>
-            <div class="g-item small placeholder"></div>
-          {% endfor %}
+        </div>
+        {% endif %}
+
+        {# Heading and lines #}
+        <div class="community-top">
+            <h2 id="community-heading" class="community-heading">
+                {{ community_section.heading_before }} <span class="community-heading--strong">{{
+                    community_section.heading_strong }}</span> {{ community_section.heading_after }}
+            </h2>
+
+            <div class="community-lines">
+                <p class="community-line">{{ community_section.line_1 }}</p>
+                <p class="community-line">{{ community_section.line_2 }}</p>
+                <p class="community-line">{{ community_section.line_3 }}</p>
+            </div>
         </div>
 
-        <div class="g g-row2">
-          {% for img in imgs|slice:"3:5" %}
-            <div class="g-item large" style="animation-delay: {{ forloop.counter0|add:3 }}00ms;">
-              <img src="{{ img.image.url }}" alt="{{ img.caption }}" loading="lazy">
+        {# images grid (same as before) #}
+        <div class="community-grid" aria-hidden="false">
+            {% with imgs=community_section.images.all %}
+            <div class="g g-row1">
+                {% for img in imgs|slice:":3" %}
+                <div class="g-item small" style="animation-delay: {{ forloop.counter0|add:0 }}00ms;">
+                    <img src="{{ img.image.url }}" alt="{{ img.caption }}" loading="lazy">
+                </div>
+                {% empty %}
+                <div class="g-item small placeholder"></div>
+                <div class="g-item small placeholder"></div>
+                <div class="g-item small placeholder"></div>
+                {% endfor %}
             </div>
-          {% empty %}
-            <div class="g-item large placeholder"></div>
-            <div class="g-item large placeholder"></div>
-          {% endfor %}
+
+            <div class="g g-row2">
+                {% for img in imgs|slice:"3:5" %}
+                <div class="g-item large" style="animation-delay: {{ forloop.counter0|add:3 }}00ms;">
+                    <img src="{{ img.image.url }}" alt="{{ img.caption }}" loading="lazy">
+                </div>
+                {% empty %}
+                <div class="g-item large placeholder"></div>
+                <div class="g-item large placeholder"></div>
+                {% endfor %}
+            </div>
+            {% endwith %}
         </div>
-      {% endwith %}
     </div>
-  </div>
 </section>
 
 

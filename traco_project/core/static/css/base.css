@@ -7,7 +7,7 @@
 /* Neon Brand */
 .text-neon {
   color: #a7f542 !important;
-  font-size: 1.4rem;
+  font-size: 1.9rem;
   letter-spacing: 1px;
 }
 
@@ -26,7 +26,7 @@
   content: "";
   display: block;
   width: 8px;
-  height: 20px;
+  height: 25px;
   background-color: #a7f542;
   border-radius: 5px;
   position: absolute;
