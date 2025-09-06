@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACO Navbar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
+   {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top shadow-sm custom-navbar">
+  <div class="container-fluid">
+
+    <!-- Logo with neon icon -->
+    <a class="navbar-brand d-flex align-items-center fw-bold text-neon" href="{% url 'home' %}">
+      <span class="logo-icon"></span>
+      <span class="ms-4">TRACO</span>
+    </a>
+
+    <!-- Toggle Button -->
+    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 animated-links equal-spacing">
+        <li class="nav-item">
+          <a class="nav-link fw-semibold {% if active_page == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold {% if active_page == 'about' %}active{% endif %}" href="{% url 'about' %}">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold {% if active_page == 'blogs' %}active{% endif %}" href="{% url 'blogs' %}">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold {% if active_page == 'partner' %}active{% endif %}" href="{% url 'partner' %}">Become a Partner</a>
+        </li>
+{% if user.is_authenticated %}
+  <!-- Profile Icon -->
+  <li class="nav-item">
+    <a class="nav-link fw-semibold {% if active_page == 'profile' %}active{% endif %}" href="{% url 'login' %}">
+      <i class="bi bi-person-circle fs-5"></i>
+    </a>
+  </li>
+  <!-- Logout -->
+  <li class="nav-item">
+    <a class="nav-link fw-semibold" href="{% url 'logout' %}">Logout</a>
+  </li>
+{% else %}
+  <!-- Login Icon (when not authenticated) -->
+  <li class="nav-item">
+    <a class="nav-link fw-semibold {% if active_page == 'profile' %}active{% endif %}" href="{% url 'login' %}">
+      <i class="bi bi-person-circle fs-5"></i>
+    </a>
+  </li>
+{% endif %}
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+ {% block content %}{% endblock %}
+ 
+<!-- footer -->
+ <!-- Footer HTML -->
+<footer class="traco-footer">
+  <div class="traco-footer__inner">
+    <!-- Column 1: Logo + Get in Touch -->
+    <div class="traco-footer__col traco-footer__col--1">
+      {% if traco_footer_settings.site_logo %}
+        <img src="{{ traco_footer_settings.site_logo.url }}" alt="{{ traco_footer_settings.logo_alt }}" class="traco-footer__logo">
+      {% else %}
+        <div class="traco-footer__logo--placeholder">TRACO</div>
+      {% endif %}
+
+      <h4 class="traco-footer__smallheading">Get in Touch</h4>
+
+      <div class="traco-footer__socials">
+        {% for s in traco_social_links %}
+          <a class="traco-social-icon traco-social-icon--{{ s.name }}" href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ s.name }}">
+            {% if s.name == 'facebook' %}
+              <span class="tf-icon">f</span>
+            {% elif s.name == 'twitter' %}
+              <span class="tf-icon">x</span>
+            {% elif s.name == 'instagram' %}
+              <span class="tf-icon">ig</span>
+            {% else %}
+              <span class="tf-icon">S</span>
+            {% endif %}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Column 2..4: Links (we render columns 2,3,4 as in the screenshot) -->
+<div class="traco-footer__col traco-footer__col--2">
+  <h4 class="traco-footer__col-title"> </h4>
+  <ul class="traco-footer__links">
+    {% for l in traco_footer_columns.2 %}
+      {% if l.url %}
+        <li><a href="{{ l.url }}">{{ l.text }}</a></li>
+      {% else %}
+        <li><span class="no-link">{{ l.text }}</span></li>
+      {% endif %}
+    {% empty %}
+      <li><a href="#">Home</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="traco-footer__col traco-footer__col--3">
+  <h4 class="traco-footer__col-title">Information</h4>
+  <ul class="traco-footer__links">
+    {% for l in traco_footer_columns.3 %}
+      {% if l.url %}
+        <li><a href="{{ l.url }}">{{ l.text }}</a></li>
+      {% else %}
+        <li><span class="no-link">{{ l.text }}</span></li>
+      {% endif %}
+    {% empty %}
+      <li><a href="#">Market Explore</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="traco-footer__col traco-footer__col--4">
+  <h4 class="traco-footer__col-title">Resources</h4>
+  <ul class="traco-footer__links">
+    {% for l in traco_footer_columns.4 %}
+      {% if l.url %}
+        <li><a href="{{ l.url }}">{{ l.text }}</a></li>
+      {% else %}
+        <li><span class="no-link">{{ l.text }}</span></li>
+      {% endif %}
+    {% empty %}
+      <li><a href="#">FAQ's</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+    <!-- Column 5: Newsletter -->
+    <div class="traco-footer__col traco-footer__col--5">
+      <h4 class="traco-footer__col-title">{{ traco_footer_settings.newsletter_heading }}</h4>
+
+      <form id="traco-news-form" class="traco-news-form" method="post" action="{% url 'footer_subscribe' %}">
+        {% csrf_token %}
+        <div class="traco-news-input-wrap">
+          <input id="traco-news-email" name="email" type="email" placeholder="{{ traco_footer_settings.newsletter_placeholder }}" required>
+          <button type="submit" class="traco-news-btn">{{ traco_footer_settings.newsletter_button_text }}</button>
+        </div>
+        <p class="traco-news-desc">{{ traco_footer_settings.newsletter_description }}</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="traco-footer__bottom">
+    <p>© {{ now.year }} TRACO — All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

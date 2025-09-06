@@ -1,0 +1,100 @@
+:root{
+  --bg:#0b0f0e;
+  --neon:#a7f542;
+  --btn:#4b4b52;
+}
+
+body{ background:var(--bg); }
+
+.auth-wrap{ max-width:1100px; margin-top:50px; }
+.auth-row{ padding:30px 10px 60px; }
+
+/* Left image */
+.side-image{
+  width:590px; max-width:100%;
+  height:500px; aspect-ratio:16/12;
+  display:flex; align-items:center; justify-content:center;
+}
+.side-image img{
+  width:100%; height:100%; object-fit:contain;
+  filter:drop-shadow(0 14px 24px rgba(0,0,0,.35));
+}
+
+/* Right card */
+.auth-card{ color:#e8f0e8; }
+.auth-title{ color:#cfe9c4; text-align:center; margin-bottom:16px; }
+.neon{ color:var(--neon); }
+
+/* ---------- Inputs: solid white ---------- */
+.form-control{
+  display:block; width:100%;
+  height:60px;
+  padding:12px 14px;
+  font-size:1rem; font-weight:500; color:#111;
+  background:#fff !important;
+  border:1px solid #ccc; border-radius:14px;
+  transition:border-color .15s, box-shadow .15s;
+}
+.form-control:focus{
+  background:#fff !important; color:#111;
+  border-color:var(--neon);
+  outline:0; box-shadow:0 0 0 .2rem rgba(167,245,66,.25);
+}
+
+/* ---------- STATIC labels with subtle animations ---------- */
+/* keep your current wrapper class; labels are not floating anymore */
+.float-group{ position:relative; padding-bottom:8px; }
+.float-group .form-label{
+  position:static; display:block;
+  margin:0 0 6px;
+  color:var(--neon); font-size: 20px; font-weight:600;
+  transition: color .25s ease, letter-spacing .25s ease, transform .25s ease;
+}
+
+/* Animated underline + label accent on focus */
+.float-group::after{
+  content:""; position:absolute; left:12px; right:12px; bottom:0;
+  height:2px; background:var(--neon);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .25s ease;
+  opacity:.9; border-radius:2px;
+}
+.float-group:focus-within::after{ transform:scaleX(1); }
+.float-group:focus-within .form-label{
+  color:var(--neon);
+  letter-spacing:.2px;
+  transform:translateX(2px);
+}
+
+/* remove floating-specific padding from inputs */
+.float-group .form-control{ padding-top:12px; padding-bottom:12px; }
+
+/* Links & button */
+.link-neon{ color:var(--neon); text-decoration:none; }
+.link-neon:hover{ text-decoration:underline; }
+
+.btn-auth{
+  width:100%; background:var(--btn); color:#fff; border:0;
+  border-radius:14px; padding:12px 14px; font-weight:700;
+  transition:transform .2s, filter .2s;
+}
+.btn-auth:hover{ transform:translateY(-2px); filter:brightness(1.05); }
+
+.below-text{ color:#cfe9c4; text-align:center; }
+
+/* Simple reveal for blocks (keep if you like) */
+.reveal-up{ opacity:0; transform:translateY(24px); transition:all .6s ease; }
+.reveal-up.in{ opacity:1; transform:none; }
+
+/* remove old input-reveal that hid fields */
+.reveal-group .form-control{ opacity:1; transform:none; }
+
+/* Floating image animation */
+.float-anim{ animation:floatY 4s ease-in-out infinite; }
+@keyframes floatY{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+/* Mobile */
+@media (max-width:991.98px){
+  .auth-row{ padding-top:20px; }
+  .side-image{ margin-top:10px; }
+}

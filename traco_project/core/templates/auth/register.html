@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-wrap container-xl">
+  <div class="row align-items-center g-4 auth-row">
+
+    <!-- Left image -->
+    <div class="col-lg-6 d-flex justify-content-center">
+      <div class="side-image float-anim">
+        {% if side %}
+          <img src="{{ side.image.url }}" alt="{{ side.alt_text|default:'Register' }}">
+        {% else %}
+          <img src="{% static 'images/placeholder-bull-gold.png' %}" alt="Auth Image">
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Right form -->
+    <div class="col-lg-6">
+      <div class="auth-card reveal-up">
+        <h3 class="auth-title neon">Register</h3>
+
+<form method="post" action="{% url 'register' %}" novalidate id="registerForm" class="reveal-group">
+          {% csrf_token %}
+
+          <div class="mb-3 float-group">
+            <label class="form-label label-neon">Name</label>
+            {{ form.name }}
+            <div class="invalid-feedback">Only letters and spaces.</div>
+          </div>
+
+          <div class="mb-3 float-group">
+            <label class="form-label label-neon">Mobile No</label>
+            {{ form.mobile }}
+            <div class="invalid-feedback">Only numbers.</div>
+          </div>
+
+          <div class="mb-3 float-group">
+            <label class="form-label label-neon">E-mail id</label>
+            {{ form.email }}
+            <div class="invalid-feedback">Enter a valid email.</div>
+          </div>
+
+          <div class="mb-3 float-group">
+            <label class="form-label label-neon">Password</label>
+            {{ form.password1 }}
+            <div class="invalid-feedback">Minimum 6 characters.</div>
+          </div>
+ 
+          <div class="mb-2 float-group">
+            <label class="form-label label-neon">Confirm Password</label>
+            {{ form.password2 }}
+            <div class="invalid-feedback">Passwords must match.</div>
+          </div>
+
+          <button class="btn-auth" type="submit">Register</button>
+
+          <p class="below-text mt-3">
+            Already Have an Account? <a class="link-neon" href="{% url 'login' %}">Log in Here</a>
+          </p>
+        </form>
+        {% if form.errors %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Please fix the following errors:</strong>
+    <ul class="mb-0">
+      {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+          <li><strong>{{ field|capfirst }}:</strong> {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/auth.js' %}"></script>
+{% endblock %}

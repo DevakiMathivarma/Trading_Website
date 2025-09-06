@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/partner.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<section class="partner-wrap container-xl px-3 px-md-4">
+
+  <!-- top row -->
+  <div class="row g-4 align-items-center mt-4">
+    <!-- left image -->
+    <div class="col-lg-6 d-flex justify-content-center">
+      <div class="hero-figure float-anim reveal-in">
+        {% if page and page.hero_image %}
+          <img src="{{ page.hero_image.url }}" alt="Partner">
+        {% else %}
+          <img src="{% static 'images/partner-hero.png' %}" alt="Partner">
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- right form -->
+    <div class="col-lg-6">
+      <div class="form-side reveal-in">
+        <h2 class="head">
+          {{ page.heading_lead }} <span class="neon">{{ page.highlight }}</span> {{ page.heading_tail }}
+        </h2>
+
+        <form method="post" class="partner-form" novalidate>
+          {% csrf_token %}
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              {{ form.name }}
+              {% for e in form.name.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="col-md-6">
+              {{ form.phone }}
+              {% for e in form.phone.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="col-12">
+              {{ form.email }}
+              {% for e in form.email.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="col-md-6">
+              <div class="select-wrap">
+                {{ form.city }}
+                <i class="bi bi-caret-down-fill"></i>
+              </div>
+              {% for e in form.city.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="col-md-6">
+              {{ form.pincode }}
+              {% for e in form.pincode.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+            </div>
+          </div>
+
+          <button class="btn-otp mt-3" type="submit">Send OTP</button>
+
+          {% if page %}
+          <div class="contact mt-3">
+            <p class="text-light small">{{ page.contact_heading }}</p>
+            <p class="small m-0"><span class="muted">{{ page.phone_label }} :</span> {{ page.phone_value }}</p>
+            <p class="small"><span class="muted">{{ page.email_label }} :</span> {{ page.email_value }}</p>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- centered copy -->
+  {% if page %}
+  <div class="center-copy reveal-in">
+    <p class="neon-strong">{{ page.line1 }}</p>
+    <p class="neon-line">{{ page.line2 }}</p>
+    {% if page.line3 %}<p>{{ page.line3 }}</p>{% endif %}
+  </div>
+  {% endif %}
+
+  <hr class="center-hr">
+
+  <!-- features -->
+  <div class="row g-4 mt-3">
+    {% for f in features %}
+    <div class="col-md-6">
+      <div class="feature-card slide-in">
+        <img class="feat-icon" src="{{ f.icon.url }}" alt="{{ f.title }}">
+        <div class="feat-body">
+          <h5 class="feat-title neon">{{ f.title }}</h5>
+          <p class="feat-text">{{ f.description }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% if messagealert %}
+  <div class="alert alert-info alert-dismissible fade show fixed-top text-center" role="alert" style="z-index:1055;">
+    {{ messagealert }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}
+
+
+
+
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/partner.js' %}"></script>
+{% endblock %}

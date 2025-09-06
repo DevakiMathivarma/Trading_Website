@@ -1,0 +1,136 @@
+/* Page base */
+:root{
+  --bg:#0b0f0e;
+  --neon:#a7f542;
+  --pill:#dcdcd6;
+  --tab-outline:#7ca13b;
+  --card-radius:22px;
+}
+body { background: var(--bg); }
+
+/* container width similar to 1100px design */
+.blog-wrap{ max-width: 1200px;margin-top: 120px; }
+
+/* ---------- HERO ---------- */
+.hero-row{ margin-top: 80px; margin-bottom: 22px; }
+.hero-copy .hero-heading{
+  color:#fff; font-weight:600; line-height:1.2; margin-bottom:10px;
+  font-size: clamp(30px, 3.2vw, 40px);margin-left: 50px;
+}
+
+.hero-copy .neon{ color: var(--neon); display:inline-block;margin-left: 30px; }
+.hero-copy .hero-subtext{
+  color:#d9e0d9; font-size: clamp(22px, 1.6vw, 16px);
+  max-width: 420px;text-align: center;
+}
+
+/* oval frame with double ring + gap */
+.oval-wrap{
+  position: relative;
+  width: var(--oval-w,280px);
+  height: var(--oval-h,340px);
+  border-radius: 50% / 58%;
+  padding: 20px;     /* space between outer and inner ring */
+  isolation: isolate;
+}
+.oval-wrap::before, .oval-wrap::after{
+  content:""; position:absolute; inset:0; border-radius:50% / 50%;
+}
+.oval-wrap::before{ border:2px solid #2c2f2e; }     /* outer dark ring */
+.oval-wrap::after { inset:6px; border:2px solid var(--neon); } /* inner neon ring */
+.oval-img{
+  position:absolute; inset:14px;
+  width: calc(100% - 32px); height: calc(100% - 32px);
+  object-fit: cover; border-radius: 50% / 50%;
+  filter: saturate(1.02);padding: 10px;
+}
+
+/* floating blue star badges (pure CSS) */
+.star-badge{
+  --size:50px;
+  position:absolute; width:var(--size); height:var(--size);
+
+}
+.star-badge img{
+  width:60px;
+  height:60px;
+}
+.star-badge::before, .star-badge::after{
+  content:""; position:absolute;  border-radius:3px;
+}
+.star-badge::before{ top:41%; left:20%; }
+.star-badge::after{ top:20%; left:41%; }
+.star-top{ right:12px; top:8px; animation: floatY 3.6s ease-in-out infinite; }
+.star-bottom{ left:12px; bottom:8px; animation: floatY 3.8s ease-in-out infinite reverse; }
+@keyframes floatY{
+  0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-6px); }
+}
+
+/* ---------- CATEGORY TABS ---------- */
+.category-track{ margin: 18px 0 8px; }
+.category-tabs{
+  list-style:none; margin:0; padding:8px 50px; display:flex; gap:22px;
+  border:2px solid var(--tab-outline); border-radius:999px;
+  align-items:center; justify-content:space-between; overflow-x:auto;
+}
+.cat-item{ flex:1; display:flex; }
+.btn-tab{
+  width:100%; border-radius:36px; border:1px solid transparent;
+  background:transparent; color:var(--neon);
+  padding:14px 14px;font-size: 25px; font-weight:600; white-space:nowrap;
+  transition: all .25s ease; outline:none;
+}
+.btn-tab:hover{ transform: translateY(-2px); }
+.btn-tab.active{
+  background: var(--pill); color:#111; border-color: var(--pill);
+  box-shadow: 0 8px 18px rgba(0,0,0,.22) inset;
+}
+
+/* ---------- CARDS GRID ---------- */
+.blog-card{
+  background:#fff; border-radius: 50px; overflow:hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.blog-card:hover{ transform: translateY(-6px); box-shadow: 0 16px 34px rgba(0,0,0,.35); }
+
+.card-img{ position:relative; height: 390px; overflow:hidden; }
+.card-img img{ width:100%; height:100%; object-fit:cover; display:block;border-radius: 50px; }
+.img-label{
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  transform: translateX(-50%);
+  color: black;
+  font-weight: 800;
+  font-size: 20px;
+  padding: 12px 30px;
+  border-radius: 18px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  text-align: center;
+  white-space: nowrap;
+}
+.card-body{ padding:16px 16px 20px; }
+.meta{ color:#868484; font-size:22px; margin-bottom:6px;text-align: center;font-weight: 700; }
+.title{ color:#0c1010;font-size: 24px; font-weight:700; line-height:1.35; text-align: center;}
+
+/* MORE button */
+.btn-more{
+  background: transparent; color:#fff; border:1px solid var(--neon);
+  border-radius: 999px; padding:10px 23px; font-weight:600;
+  transition: all .25s ease;font-size: 17px;
+}
+.btn-more:hover{ background:var(--neon); color:#111; transform: translateY(-2px); }
+
+/* ---------- REVEAL ANIMATIONS (no AOS) ---------- */
+.reveal-left{ opacity:0; transform: translateX(-30px); transition: all .7s ease; }
+.reveal-up  { opacity:0; transform: translateY(24px);  transition: all .7s ease; }
+.reveal.in  { opacity:1; transform:none; }
+
+/* responsive trims */
+@media (max-width: 991.98px){
+  .oval-wrap{ margin-top: 12px; }
+}
+@media (max-width: 575.98px){
+  .card-img{ height: 200px; }
+}

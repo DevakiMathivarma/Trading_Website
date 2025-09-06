@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+ {% block extra_css %}
+ <link rel="stylesheet" href="{% static 'css/about.css' %}">
+ {% endblock %}
+{% block content %}
+
+<!-- Banner -->
+<section class="about-banner">
+  <img src="{{ about_page.banner_image.url }}" alt="About Banner" class="banner-img">
+  <h1 class="banner-text">
+    <span class="black-text">About</span> <span class="green-text">TRACO</span>
+  </h1>
+</section>
+
+<!-- Who We Are -->
+<section class="who-we-are text-center">
+  <h2 class="radial-text">{{ about_page.who_we_are_title }}</h2>
+  <p class="para">{{ about_page.who_we_are_text1 }}</p>
+  <p class="para">{{ about_page.who_we_are_text2 }}</p>
+</section>
+<!-- Mission -->
+<section class="mission fade-right">
+  <div class="mission-container">
+    <img src="{{ mission.image.url }}" alt="Mission" class="mission-img">
+    <div class="mission-content">
+      <h3>{{ mission.title }}</h3>
+      <p>{{ mission.description }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Vision -->
+<section class="vision fade-left">
+  <div class="vision-container">
+    <div class="vision-content">
+      <h3>{{ vision.title }}</h3>
+      <p>{{ vision.description }}</p>
+    </div>
+    <img src="{{ vision.image.url }}" alt="Vision" class="vision-img">
+  </div>
+</section>
+
+
+<!-- Why Choose TRACO -->
+<section class="why-choose">
+  <h2 class="text-center"><span class="black-text">Why Choose</span> <span class="green-text">TRACO</span></h2>
+  <div class="row g-2 mt-3">
+    {% for item in why_choose %}
+    <div class="col-md-3 col-6">
+      <div class="choose-card fade-up">
+        <img src="{{ item.icon.url }}" alt="{{ item.title }}" class="choose-icon">
+        <h5>{{ item.title }}</h5>
+        <p>{{ item.description }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
+  {% block extra_js %}
+<script src="{% static 'js/about.js' %}" defer></script>
+{% endblock %}

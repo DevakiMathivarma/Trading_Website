@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blogs.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="blog-wrap container-xl px-3 px-md-4">
+  <!-- HERO: two columns -->
+  <div class="row g-6 align-items-center hero-row">
+    <!-- left copy -->
+    <div class="col-lg-7">
+      <div class="hero-copy reveal-left">
+        <h2 class="hero-heading">
+          {{ hero.heading_line|default:"Don’t Just Gain info" }}<br>
+          <span class="neon">{{ hero.highlight_text|default:"Build Knowledge" }}</span>
+        </h2>
+        <p class="hero-subtext">{{ hero.subtext|safe }}</p>
+      </div>
+    </div>
+
+    <!-- right oval image -->
+    <div class="col-lg-5 d-flex justify-content-center">
+      <div class="oval-wrap reveal-up"
+           style="--oval-w: {{ hero.oval_width|default:260 }}px; --oval-h: {{ hero.oval_height|default:320 }}px;">
+        <img src="{{ hero.image.url }}" alt="Hero" class="oval-img">
+        <!-- floating blue star badges -->
+        <span class="star-badge star-top" aria-hidden="true">  <img src="{% static 'images\sparkling_star.png' %}" alt="Supplyhive"></span>
+        <span class="star-badge star-bottom" aria-hidden="true"><img src="{% static 'images\sparkling_star.png' %}" alt="Supplyhive"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY TABS -->
+  <div class="category-track reveal-up">
+    <ul class="category-tabs" id="categoryTabs">
+      {% for cat in categories %}
+      <li class="cat-item">
+        <button class="btn-tab {% if cat.slug == active_slug %}active{% endif %}"
+                data-slug="{{ cat.slug }}">{{ cat.name }}</button>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- POSTS GRID (one container per category, switch by JS) -->
+  {% for cat in categories %}
+  <div class="posts-section {% if cat.slug != active_slug %}d-none{% endif %}" id="posts-{{ cat.slug }}">
+    <div class="row g-4 mt-2" data-slug="{{ cat.slug }}">
+      {% for post in cat.active_posts %}
+      <div class="col-lg-4 col-md-6 post-col">
+        <article class="blog-card reveal-up">
+          <div class="card-img">
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            <div class="img-label">{{ post.overlay_title }}</div>
+          </div>
+          <div class="card-body">
+            <div class="meta">{{ post.meta_text }}</div>
+            <h5 class="title">{{ post.title }}</h5>
+          </div>
+        </article>
+      </div>
+      {% empty %}
+        <div class="col-12"><p class="text-center text-muted">No posts found in {{ cat.name }}.</p></div>
+      {% endfor %}
+    </div>
+
+    {% if cat.active_posts|length > 3 %}
+    <div class="text-center mt-4">
+      <button class="btn-more" data-target="{{ cat.slug }}">
+        More <i class="bi bi-chevron-down"></i>
+      </button>
+    </div>
+    {% endif %}
+  </div>
+{% endfor %}
+
+
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/blogs.js' %}"></script>
+{% endblock %}

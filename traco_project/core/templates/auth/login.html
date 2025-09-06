@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-wrap container-xl">
+  <div class="row align-items-center g-4 auth-row">
+
+    <!-- Left image -->
+    <div class="col-lg-6 d-flex justify-content-center">
+      <div class="side-image float-anim">
+        {% if side %}
+          <img src="{{ side.image.url }}" alt="{{ side.alt_text|default:'Login' }}">
+        {% else %}
+          <img src="{% static 'images/placeholder-bull-gold.png' %}" alt="Auth Image">
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Right form -->
+    <div class="col-lg-6">
+      <div class="auth-card reveal-up">
+        <h3 class="auth-title neon">Login</h3>
+
+        <form method="post" novalidate id="loginForm" class="reveal-group">
+          {% csrf_token %}
+          <div class="mb-3 float-group">
+            <label class="form-label label-neon">E-mail id</label>
+            {{ form.email }}
+            <div class="invalid-feedback">Enter a valid email.</div>
+          </div>
+
+          <div class="mb-2 float-group">
+            <label class="form-label label-neon">Password</label>
+            {{ form.password }}
+            <div class="invalid-feedback">Password required.</div>
+          </div>
+
+          <div class="text-end mb-3">
+            <a class="link-neon" href="{% url 'password_reset' %}">Forgot Your Password?</a>
+          </div>
+
+          <button class="btn-auth" type="submit">Login</button>
+
+          <p class="below-text mt-3">
+            New Customer? <a class="link-neon" href="{% url 'register' %}">Create Your Account</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/auth.js' %}"></script>
+{% endblock %}
